@@ -1,14 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Internacionalização</string>
     <string name="patrulha">Texto em português: Escute as minhas palavras e testemunhem os meus votos. A noite chega, e agora começa minha vigia. Não terminará até a minha morte. Não tomarei esposa, não possuirei terras, não gerarei filhos. Não usarei coroas e não conquistarei glórias. Viverei e morrerei no meu posto. Sou a espada na escuridão. Sou o vigilante nas muralhas. Sou o fogo que arde contra o frio, a luz que trás consigo a alvorada, a trombeta que acorda os que dormem, o escudo que defende os reinos dos homens. Dou minha vida e a minha honra a Patrulha da Noite. Por esta noite, e por todas as noites que estão por vir</string>
-    <string name="id_lang">ling</string>
-    <string-array name="languages">
-        <item>Selecione linguagem</item>
-        <item>Português</item>
-        <item>Inglês</item>
-        <item>Espanhol</item>
-        <item>Francês</item>
-    </string-array>
-    <string name="linguagem">Padrão</string>
-
+    <string name="escolha">Escolha a linguagem</string>
+    <string name="linguagem">Porutuguês</string>
 </resources>

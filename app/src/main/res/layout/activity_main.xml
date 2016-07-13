@@ -23,9 +23,17 @@
             android:paddingBottom="25sp"/>
 
         <TextView
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/linguagem"
+            android:id="@+id/textView" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/patrulha" />
+
     </LinearLayout>
 
 </RelativeLayout>

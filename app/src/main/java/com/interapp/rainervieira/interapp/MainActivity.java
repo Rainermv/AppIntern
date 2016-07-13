@@ -1,5 +1,6 @@
 package com.interapp.rainervieira.interapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -20,6 +21,8 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
+    String language;
+
     Locale current_locale;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -32,11 +35,44 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        boolean reload = getIntent().getBooleanExtra("reload", true);
+
+        SharedPreferences languagepref = getSharedPreferences("language_settings", MODE_PRIVATE);
+        language = languagepref.getString("language", "pt");
+
+        //if (!reload) {
+        updateLocale();
+        //}
+
         Spinner spinner_language = (Spinner) findViewById(R.id.spinner_language);
         spinner_language.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                SetLanguage(position);
+
+                //String new_language = "pt";
+                switch (position) {
+                    case 1:
+                        language = "pt";
+                        break;
+                    case 2:
+                        language = "en";
+                        break;
+                    case 3:
+                        language = "es";
+                        break;
+                    case 4:
+                        language = "fr";
+                        break;
+
+                    default:
+                        return;
+                }
+
+                //loadLanguage(new_language);
+                updateLocale();
+                saveLanguage();
+                //saveLanguage();
+                refresh();
             }
 
             @Override
@@ -49,57 +85,53 @@ public class MainActivity extends AppCompatActivity {
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-    }
 
-    public void SetLanguage(int position) {
 
-        //String language = "pt";
-        switch (position) {
-            case 1:
-                current_locale = Locale.getDefault();
-                break;
-            case 2:
-                current_locale = Locale.ENGLISH;
-                break;
-            case 3:
-                current_locale = new Locale("es");
-                break;
-            case 4:
-                current_locale = Locale.FRENCH;
-                break;
+
+        if(reload){
+            refresh();
         }
-
-        //current_locale = new Locale(language);
-        Resources res = getResources();
-        DisplayMetrics dm = res.getDisplayMetrics();
-        Configuration conf = res.getConfiguration();
-
-        conf.locale = current_locale;
-
-        res.updateConfiguration(conf, dm);
-        Intent refresh = new Intent(this, MainActivity.class);
-        startActivity(refresh);
-
-
     }
 
-    public void SelectLanguage(View view) {
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        // refresh your views here
+        super.onConfigurationChanged(newConfig);
+    }
 
-        String languageToLoad = "pt-br";
-        Locale locale = new Locale(languageToLoad);
-        Locale.setDefault(locale);
+    public void updateLocale() {
 
-        Configuration config = new Configuration();
-        config.locale = locale;
+           //language = new_language;
+           current_locale = new Locale(language);
 
-        getBaseContext().getResources().updateConfiguration(config,
-                getBaseContext().getResources().getDisplayMetrics());
+           Resources res = getResources();
+           DisplayMetrics dm = res.getDisplayMetrics();
+           Configuration conf = res.getConfiguration();
 
-        SharedPreferences languagepref = getSharedPreferences("language", MODE_PRIVATE);
+           conf.locale = current_locale;
+
+           res.updateConfiguration(conf, dm);
+
+
+
+           //language = new_language;
+
+           //refresh();
+    }
+
+    void saveLanguage(){
+        SharedPreferences languagepref = getSharedPreferences("language_settings", MODE_PRIVATE);
         SharedPreferences.Editor editor = languagepref.edit();
-        editor.putString("languageToLoad", languageToLoad);
+        editor.putString("language", language);
         editor.commit();
+    }
 
+
+    void refresh(){
+
+        Intent refresh = new Intent(this, MainActivity.class);
+        refresh.putExtra("reload", false);
+        startActivity(refresh);
 
     }
 

@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/InterApp.iml" filepath="$PROJECT_DIR$/InterApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/appInter.iml" filepath="$PROJECT_DIR$/appInter.iml" />
     </modules>
   </component>
 </project>
